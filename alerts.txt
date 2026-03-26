@@ -1,0 +1,5 @@
+=== Threat Detection Report ===
+
+[HIGH] Brute force suspected from 192.168.1.10 (4 failed attempts)
+[MEDIUM] Possible account compromise: admin from 192.168.1.10
+[MEDIUM] High activity from 192.168.1.10 (5 total attempts)
