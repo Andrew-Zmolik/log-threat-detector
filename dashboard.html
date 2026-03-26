@@ -1,14 +1,68 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2299.7">
-  <style type="text/css">
+  <meta charset="UTF-8">
+  <title>Threat Dashboard</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: white;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .alert {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .high {
+      background: #7f1d1d;
+    }
+
+    .medium {
+      background: #78350f;
+    }
+
+    .low {
+      background: #064e3b;
+    }
   </style>
 </head>
+
 <body>
+
+  <h1>🚨 Threat Dashboard</h1>
+  <div id="alerts"></div>
+
+  <script>
+    fetch('alerts.txt')
+      .then(response => response.text())
+      .then(data => {
+        const container = document.getElementById('alerts');
+
+        data.split('\n').forEach(line => {
+          if (line.trim() === '' || line.includes('===')) return;
+
+          const div = document.createElement('div');
+          div.classList.add('alert');
+
+          if (line.includes('[HIGH]')) div.classList.add('high');
+          else if (line.includes('[MEDIUM]')) div.classList.add('medium');
+          else div.classList.add('low');
+
+          div.textContent = line;
+          container.appendChild(div);
+        });
+      });
+  </script>
+
 </body>
 </html>
